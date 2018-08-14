@@ -19,7 +19,7 @@
                     <td>{{ car.model }}</td> 
                     <td>{{ car.year }}</td>
                     <td>{{ car.maxSpeed }}</td>
-                    <td>{{ car.isAutomatic }}</td> 
+                    <td>{{ car.isAutomatis ? "Automatic" : "Manual" }}</td> 
                     <td>{{ car.engine }}</td>
                     <td>{{ car.numberOfDoors }}</td>
                 </tr>
