@@ -1,8 +1,50 @@
 <template>
-    <h1>CARS</h1>
+    <div>
+        <h1>CARS</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>brand</th>
+                    <th>model</th> 
+                    <th>year</th>
+                    <th>max speed</th>
+                    <th>transmission</th> 
+                    <th>engine</th>
+                    <th>number of doors</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(car, index) in cars" :key="index">
+                    <td>{{ car.brand }}</td>
+                    <td>{{ car.model }}</td> 
+                    <td>{{ car.year }}</td>
+                    <td>{{ car.maxSpeed }}</td>
+                    <td>{{ car.isAutomatic }}</td> 
+                    <td>{{ car.engine }}</td>
+                    <td>{{ car.numberOfDoors }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
+
 <script>
+
+import { cars } from '../services/Cars.js'
+
 export default {
-    name:'AppCars'
+  data() {
+    return {
+      cars: []
+    }
+  },
+  beforeRouteEnter (to, from, next) {
+    cars.getAll()
+      .then((response) => {
+          next((vm) => {
+            vm.cars = response.data
+          })
+    })
+  }
 }
 </script>
