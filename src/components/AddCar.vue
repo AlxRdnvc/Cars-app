@@ -40,6 +40,9 @@
            <label for="diesel">Diesel</label><br>
 
            <button @click="addNewCar()" type="button">Add car</button>
+           <input type="reset" value="Reset" /> 
+           <!-- elements of type "reset"  are rendered as buttons, 
+           with a default click event handler that resets all of the inputs in the form to their initial values. -->
 
        </form>
     </div>
