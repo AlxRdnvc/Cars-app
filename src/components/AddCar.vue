@@ -1,49 +1,59 @@
 <template>
     <div>
         <h1>ADD CARS</h1>
-        <form>
-           <label>Brand</label> 
-           <input v-model="newCar.brand" type="text" placeholder="brand..."><br> 
+        <form @submit.prevent>
 
-           <label>Model</label> 
-           <input v-model="newCar.model" type="text" placeholder="model..."><br> 
+            <div class="form-group">
+                <label><b>Brand</b></label> 
+                <input class="form-control" v-model="newCar.brand" type="text" minlength="2" placeholder="brand..." required>
+            </div>
+            <div class="form-group">
+                <label><b>Model</b></label> 
+                <input class="form-control" v-model="newCar.model" type="text" minlength="2" placeholder="model..." required>
+            </div>
+            <div class="form-group">
+                <label><b>Year</b></label><br> 
+            <select v-model="newCar.year" required>
+                <option disabled value="">Please select year</option>
+                <option v-for="(year, index) in years" :key="index">{{ year }}</option>
+            </select>
+            </div>  
+            <div class="form-group">
+                <label><b>Max Speed</b></label> 
+                <input class="form-control" v-model="newCar.maxSpeed" type="number" placeholder="max speed...">
+            </div>
+            <div class="form-group">
+                <label><b>Number of doors</b></label> 
+                <input class="form-control" v-model="newCar.numberOfDoors" type="number" placeholder="number of doors..." required>
+            </div>
+            <div class="form-group">
+                <label><b>Is automatic</b></label><br> 
+                <input type="checkbox" id="true" value="true" v-model="newCar.isAutomatic" required>
+                <label for="true">Yes</label>
+            </div>
+                <label><b>Engine</b></label> 
+            <div class="form-group">
+                <input type="radio" id="electric" value="Electric" v-model="newCar.engine" required>
+                <label for="electric">Electric</label>
+            </div>
+            <div class="form-group">
+                <input type="radio" id="petrol" value="Petrol" v-model="newCar.engine" required>
+                <label for="petrol">Petrol</label>
+            </div>
+            <div class="form-group">
+                <input type="radio" id="hybrid" value="Hybrid" v-model="newCar.engine" required>
+                <label for="hybrid">Hybrid</label>
+            </div>
+            <div class="form-group">
+                <input type="radio" id="diesel" value="Diesel" v-model="newCar.engine" required>
+                <label for="diesel">Diesel</label>
+            </div>
 
-           <label>Year</label> 
-           <select v-model="newCar.year">
-               <option disabled value="">Please select year</option>
-               <option v-for="(year, index) in years" :key="index">{{ year }}</option>
-           </select><br>
-           
-
-           <label>Max Speed</label> 
-           <input v-model="newCar.maxSpeed" type="number" placeholder="max speed..."><br> 
-
-           <label>Number of doors</label> 
-           <input v-model="newCar.numberOfDoors" type="number" placeholder="number of doors..."><br>
-
-           <label>Is automatic</label> 
-           <input type="checkbox" id="true" value="true" v-model="newCar.isAutomatic">
-           <label for="true">Yes</label><br>
-
-           <label>Engine</label> 
-
-           <input type="radio" id="electric" value="Electric" v-model="newCar.engine">
-           <label for="electric">Electric</label><br>
-
-           <input type="radio" id="petrol" value="Petrol" v-model="newCar.engine">
-           <label for="petrol">Petrol</label><br>
-
-           <input type="radio" id="hybrid" value="Hybrid" v-model="newCar.engine">
-           <label for="hybrid">Hybrid</label><br>
-
-           <input type="radio" id="diesel" value="Diesel" v-model="newCar.engine">
-           <label for="diesel">Diesel</label><br>
-
-           <button @click="addNewCar()" type="button">Add car</button>
-           <input type="reset" value="Reset" />
-           <!-- elements of type "reset"  are rendered as buttons, 
-           with a default click event handler that resets all of the inputs in the form to their initial values. -->
-           <button @click="preview()" type="button">Preview</button>
+            <button class="btn-default" style="margin-right: 20px;" @click="addNewCar()" type="submit">Add car</button>
+            <input class="btn-default" style="margin-right: 20px;" type="reset" value="Reset" />
+            <!-- elements of type "reset"  are rendered as buttons, 
+            with a default click event handler that resets all of the inputs in the form to their initial values. -->
+            <button class="btn-default" @click="preview()" type="button">Preview</button>
 
        </form>
     </div>
