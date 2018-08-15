@@ -40,9 +40,10 @@
            <label for="diesel">Diesel</label><br>
 
            <button @click="addNewCar()" type="button">Add car</button>
-           <input type="reset" value="Reset" /> 
+           <input type="reset" value="Reset" />
            <!-- elements of type "reset"  are rendered as buttons, 
            with a default click event handler that resets all of the inputs in the form to their initial values. -->
+           <button @click="preview()" type="button">Preview</button>
 
        </form>
     </div>
@@ -64,6 +65,17 @@ export default {
            cars.add(this.newCar)
            .then(response => {this.$router.push('/cars')}) // nakon resolve-a redirektuje na pocetnu '/cars' stranicu
            .catch(err => console.log(err)) // ako catch-uje error onda console.log-ujemo error
+        },
+        preview(){
+            alert(`
+                brand: ${this.newCar.brand}
+                model: ${this.newCar.model}
+                year: ${this.newCar.year}
+                max speed: ${this.newCar.maxSpeed}
+                number of doors: ${this.newCar.numberOfDoors}
+                transmition: ${this.newCar.isAutomatic ? "automatic" : "manual"}
+                engine: ${this.newCar.engine}`
+            )
         }
     },
     created(){
