@@ -1,6 +1,7 @@
 <template>
     <div>
-        <h1>ADD CARS</h1>
+        <h1 v-if="(!this.$route.params.id)">Add car</h1>
+        <h1 v-else>Edit car</h1>
         <form @submit.prevent>
 
             <div class="form-group">
@@ -49,7 +50,8 @@
                 <label for="diesel">Diesel</label>
             </div>
 
-            <button class="btn-default" style="margin-right: 20px;" @click="addNewCar()" type="submit">Add car</button>
+            <button class="btn-default" style="margin-right: 20px;" v-if="(!this.$route.params.id)" @click="addNewCar()" type="submit">Add car</button>
+            <button class="btn-default" style="margin-right: 20px;" v-else @click="edit(newCar)" type="submit">Submit</button>
             <input class="btn-default" style="margin-right: 20px;" type="reset" value="Reset" />
             <!-- elements of type "reset"  are rendered as buttons, 
             with a default click event handler that resets all of the inputs in the form to their initial values. -->
@@ -76,6 +78,12 @@ export default {
            .then(response => {this.$router.push('/cars')}) // nakon resolve-a redirektuje na pocetnu '/cars' stranicu
            .catch(err => console.log(err)) // ako catch-uje error onda console.log-ujemo error
         },
+        edit(car) {
+            cars.edit(car)
+            .then((response) => {
+                this.$router.push('/cars')})
+            .catch(err => console.log(err))
+        },
         preview(){
             alert(`
                 brand: ${this.newCar.brand}
@@ -88,9 +96,13 @@ export default {
             )
         }
     },
-    created(){
-        for(var i = 1990; i <= 2018; i++){
+    created() {
+        for (var i = 1990; i <= 2018; i++) {
             this.years.push(i);
+        }
+        if(this.$route.params.id) {
+            cars.getCar(this.$route.params.id)
+            .then(response => (this.newCar = response.data));
         }
     }
     
